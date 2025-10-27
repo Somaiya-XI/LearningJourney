@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-enum DayStatus {case Learn, Freeze}
 
 
 struct Badge: View {
-    @State var labelPrefix: String = "Days"
-    @State var label: String = ""
+    @State var vm = ViewModel()
     var status: DayStatus = .Learn
+    var count = 0
+
     var iconName: String {
         status == .Learn ?  "flame.fill" : "cube.fill"
     }
@@ -23,7 +23,6 @@ struct Badge: View {
     var txtColor: Color {
         status == .Learn ? Color.accentPrimaryTxt : Color.accentSecondaryTxt
 }
-    @State var digit: Int = 0
     var body: some View {
         
         HStack (alignment: .center, spacing: 0){
@@ -35,39 +34,22 @@ struct Badge: View {
 
 
             VStack(alignment: .leading, spacing: 0){
-                Text("\(digit)").font(.system(size: 24, weight: .semibold))
-                
-                Text("\(label)")
+                Text("\(count)").font(.system(size: 24, weight: .semibold))
+                 Text("\(vm.label)")
                     .font(.caption)
-                
-                
             }
+            
             Spacer()
 
         }.padding(.horizontal, 14)
             .frame(width: 160, height: 69)
-                    .background(fillColor)
+            .background(fillColor)
             .cornerRadius(34)
-
         
         .onAppear(perform: {
-            if digit == Int(1) || digit == Int(0) {
-                labelPrefix = "Day"
-            }
-            else{
-                labelPrefix = "Days"
-            }
-            switch status {
-            case .Learn:
-                label = "\(labelPrefix) Learned"
-            case .Freeze:
-                label = "\(labelPrefix) Freezed"
-
-            }
+            vm.setView(status: status, count: count)
             })
-        
-        
-    }
+}
     
 }
 

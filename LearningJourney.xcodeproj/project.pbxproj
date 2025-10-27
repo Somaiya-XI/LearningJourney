@@ -7,34 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5304C5062EA84DE30047216B /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5304C5052EA84DE30047216B /* ActivityView.swift */; };
-		5304C50A2EA8CDC90047216B /* ChangeGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5304C5092EA8CDC90047216B /* ChangeGoalView.swift */; };
-		5304C50E2EA8D3FE0047216B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5304C50D2EA8D3FE0047216B /* CalendarView.swift */; };
-		534426572EA5270300032EB7 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534426502EA5270300032EB7 /* OnboardingView.swift */; };
 		534426582EA5270300032EB7 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534426512EA5270300032EB7 /* OnboardingViewModel.swift */; };
 		534426592EA5270300032EB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534426542EA5270300032EB7 /* ContentView.swift */; };
 		5344265A2EA5270300032EB7 /* LearningJourneyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534426552EA5270300032EB7 /* LearningJourneyApp.swift */; };
 		5344265B2EA5270300032EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 534426532EA5270300032EB7 /* Assets.xcassets */; };
 		5344265F2EA527EE00032EB7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5344265E2EA527EE00032EB7 /* File.swift */; };
+		5347CC872EAA3A9E007FAB47 /* SavedDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347CC862EAA3A9E007FAB47 /* SavedDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5304C5052EA84DE30047216B /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		5304C5092EA8CDC90047216B /* ChangeGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeGoalView.swift; sourceTree = "<group>"; };
-		5304C50D2EA8D3FE0047216B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		534426382EA5067C00032EB7 /* LearningJourney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningJourney.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		534426502EA5270300032EB7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		534426512EA5270300032EB7 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		534426532EA5270300032EB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		534426542EA5270300032EB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		534426552EA5270300032EB7 /* LearningJourneyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningJourneyApp.swift; sourceTree = "<group>"; };
 		5344265E2EA527EE00032EB7 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		5347CC862EAA3A9E007FAB47 /* SavedDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5344265D2EA5272A00032EB7 /* SharedComponents */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SharedComponents;
+			sourceTree = "<group>";
+		};
+		5347CC7F2EA98A63007FAB47 /* activity */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = activity;
+			sourceTree = "<group>";
+		};
+		5347CC802EA98A8C007FAB47 /* calendar */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = calendar;
+			sourceTree = "<group>";
+		};
+		5347CC812EA98AA8007FAB47 /* changeGoal */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = changeGoal;
+			sourceTree = "<group>";
+		};
+		5347CC822EA98ABC007FAB47 /* onboarding */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = onboarding;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -50,30 +64,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5304C5042EA84DAF0047216B /* activity */ = {
-			isa = PBXGroup;
-			children = (
-				5304C5052EA84DE30047216B /* ActivityView.swift */,
-			);
-			path = activity;
-			sourceTree = "<group>";
-		};
-		5304C50B2EA8D3A70047216B /* changeGoal */ = {
-			isa = PBXGroup;
-			children = (
-				5304C5092EA8CDC90047216B /* ChangeGoalView.swift */,
-			);
-			path = changeGoal;
-			sourceTree = "<group>";
-		};
-		5304C50C2EA8D3E90047216B /* calendar */ = {
-			isa = PBXGroup;
-			children = (
-				5304C50D2EA8D3FE0047216B /* CalendarView.swift */,
-			);
-			path = calendar;
-			sourceTree = "<group>";
-		};
 		5344262F2EA5067C00032EB7 = {
 			isa = PBXGroup;
 			children = (
@@ -101,11 +91,11 @@
 		534426522EA5270300032EB7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5304C50C2EA8D3E90047216B /* calendar */,
-				5304C50B2EA8D3A70047216B /* changeGoal */,
 				5344265D2EA5272A00032EB7 /* SharedComponents */,
-				5304C5042EA84DAF0047216B /* activity */,
-				5344265C2EA5271B00032EB7 /* onboarding */,
+				5347CC822EA98ABC007FAB47 /* onboarding */,
+				5347CC7F2EA98A63007FAB47 /* activity */,
+				5347CC802EA98A8C007FAB47 /* calendar */,
+				5347CC812EA98AA8007FAB47 /* changeGoal */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,22 +103,23 @@
 		534426562EA5270300032EB7 /* LearningJourney */ = {
 			isa = PBXGroup;
 			children = (
+				5347CC832EAA3A05007FAB47 /* ViewModel */,
 				5344264F2EA5270300032EB7 /* Model */,
 				534426522EA5270300032EB7 /* Views */,
 				534426532EA5270300032EB7 /* Assets.xcassets */,
 				534426542EA5270300032EB7 /* ContentView.swift */,
+				5347CC862EAA3A9E007FAB47 /* SavedDataView.swift */,
 				534426552EA5270300032EB7 /* LearningJourneyApp.swift */,
 			);
 			path = LearningJourney;
 			sourceTree = "<group>";
 		};
-		5344265C2EA5271B00032EB7 /* onboarding */ = {
+		5347CC832EAA3A05007FAB47 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				534426502EA5270300032EB7 /* OnboardingView.swift */,
 				534426512EA5270300032EB7 /* OnboardingViewModel.swift */,
 			);
-			path = onboarding;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +139,10 @@
 			);
 			fileSystemSynchronizedGroups = (
 				5344265D2EA5272A00032EB7 /* SharedComponents */,
+				5347CC7F2EA98A63007FAB47 /* activity */,
+				5347CC802EA98A8C007FAB47 /* calendar */,
+				5347CC812EA98AA8007FAB47 /* changeGoal */,
+				5347CC822EA98ABC007FAB47 /* onboarding */,
 			);
 			name = LearningJourney;
 			packageProductDependencies = (
@@ -207,12 +202,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5344265F2EA527EE00032EB7 /* File.swift in Sources */,
-				534426572EA5270300032EB7 /* OnboardingView.swift in Sources */,
-				5304C50A2EA8CDC90047216B /* ChangeGoalView.swift in Sources */,
-				5304C50E2EA8D3FE0047216B /* CalendarView.swift in Sources */,
 				534426582EA5270300032EB7 /* OnboardingViewModel.swift in Sources */,
 				534426592EA5270300032EB7 /* ContentView.swift in Sources */,
-				5304C5062EA84DE30047216B /* ActivityView.swift in Sources */,
+				5347CC872EAA3A9E007FAB47 /* SavedDataView.swift in Sources */,
 				5344265A2EA5270300032EB7 /* LearningJourneyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

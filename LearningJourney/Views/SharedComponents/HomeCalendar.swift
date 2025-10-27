@@ -6,22 +6,28 @@
 //
 
 import SwiftUI
-
+import SwiftData
 struct HomeCalendar: View {
-    @State var goalTitle = "Learning Swift"
+    @Query var goals: [Goal]
+        var currentGoal: Goal? {
+        goals.first
+    }
+    
+    private let goalTitle = "Learning Swift"
     var body: some View {
         VStack (alignment: .leading){
-            CalendarPicker(displayedWeek: Date(), displayedMonth: Date())
-            Text(goalTitle).font(.callout).fontWeight(.semibold)
+            CalendarPicker()
+            Text(currentGoal?.title ?? goalTitle).font(.callout).fontWeight(.semibold)
             HStack{
                 
-                Badge(status: .Learn)
+                Badge(status: .Learn, count: currentGoal?.streak ?? 0)
                 Spacer()
-                Badge(status: .Freeze)
-                
-            }
-        }.padding(.horizontal, 14)
+                Badge(status: .Freeze, count: currentGoal?.freez ?? 0)
+                            }
+        }
         .frame(width: 365, height: 254)
+        .padding(.vertical, 12)
+        .padding(.horizontal, 16)
         .glassEffect(.regular, in: .rect(cornerRadius: 13) )
     }
 }

@@ -20,14 +20,15 @@ struct SecondaryButton: View {
 
     
     var body: some View {
-        Button{
-            action()
-        } label:{
-            Text(label).font(.body).fontWeight(.medium).frame(width: width, height: height)
-        }
-        .buttonStyle(.glassProminent)
-        .tint(fillColor)
-        .disabled(isDisabled)
+        Text(label)
+            .frame(width: width, height: height)
+            .padding(.horizontal, 21)
+            .padding(.vertical,14)
+            .font(.body).fontWeight(.medium)
+            .glassEffect(.clear.interactive( !isDisabled).tint(!isDisabled ? fillColor: .clear))
+            .onTapGesture {
+                action()
+            }.disabled(isDisabled)
     }
 }
 

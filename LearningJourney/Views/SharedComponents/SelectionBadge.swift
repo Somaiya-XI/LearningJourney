@@ -9,37 +9,18 @@ import SwiftUI
 
 struct SelectionBadge: View {
     var text = "Month"
-    @State var selected: Bool = true
-    @State var fillColor = Color.accentPrimaryExact
+    var selected: Bool = true
+    var fillColor = Color.accentPrimaryExact
     var body: some View {
-        Text(text).font(.headline).fontWeight(.medium).frame(width:97, height: 48).glassEffect(.clear.interactive().tint(fillColor))
-            .onTapGesture {
-                selected = !selected
-            }
-            .onChange(of: selected,  {
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    if !selected {
-                        
-                        fillColor = Color.clear}
-                    else{
-                        fillColor = Color.accentPrimaryExact
-                    }
-                }
-                
-           
-        }).onAppear(perform: {
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    if !selected {
-                        
-                        fillColor = Color.clear}
-                    else{
-                        fillColor = Color.accentPrimaryExact
-                    }
-                }
-            })
+        
+        Text(text).font(.headline).fontWeight(.medium).frame(width:97, height: 48)
+            .glassEffect(.clear.interactive().tint(selected ? fillColor: Color.clear))
+            .animation(.easeInOut(duration: 0.35), value: selected)
+        
     }
-    
 }
+
+
 
 #Preview {
     SelectionBadge()
