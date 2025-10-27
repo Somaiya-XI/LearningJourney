@@ -9,7 +9,8 @@ import SwiftUI
 import SwiftData
 struct GoalForm: View {
     @Environment(ViewModel.self) private var vm
-
+    @Environment(\.modelContext) private var modelContext
+    
     var body: some View {
         @Bindable var vm = vm
         VStack(alignment: .leading, spacing: 4){
@@ -39,6 +40,8 @@ struct GoalForm: View {
             }
             
             Spacer()
+        }.onAppear {
+            vm.loadGoal(context: modelContext)
         }
         
     }

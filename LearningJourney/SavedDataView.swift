@@ -24,7 +24,7 @@ struct SavedDataView: View {
                 }.buttonStyle(.glassProminent)
                     .tint(.accentPrimaryExact)
                 
-                Button("Freez a day"){
+                Button("Freeze a day"){
                     let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
                     
                     let day = Day(date: yesterday, dayStatus: .Freeze)

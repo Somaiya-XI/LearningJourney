@@ -21,19 +21,24 @@ class Goal: Identifiable {
     var title: String
     var learningDuration: learningDuration
     var streak: Int = 0
-    var freez: Int = 0
+    var freeze: Int = 0
     var lastLoggedDay: Day?
+    var isLoggedToday: Bool
+    var isLearned: Bool
+    var days: [Day] = []
     
     init(_ title: String, _ learningDuration: learningDuration, _ lastLoggedDay: Day? = nil) {
         self.id = UUID()
         self.title = title
         self.learningDuration = learningDuration
         self.streak = 0
-        self.freez = 0
+        self.freeze = 0
         self.lastLoggedDay = lastLoggedDay
+        self.isLoggedToday = false
+        self.isLearned = false
+
     }
     
-    func setFreeze() {}
 }
 
 enum DayStatus: String, Codable {

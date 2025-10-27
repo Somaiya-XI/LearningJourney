@@ -22,7 +22,7 @@ struct HomeCalendar: View {
                 
                 Badge(status: .Learn, count: currentGoal?.streak ?? 0)
                 Spacer()
-                Badge(status: .Freeze, count: currentGoal?.freez ?? 0)
+                Badge(status: .Freeze, count: currentGoal?.freeze ?? 0)
                             }
         }
         .frame(width: 365, height: 254)

@@ -7,9 +7,18 @@
 
 import SwiftUI
 import SwiftData
+
 struct ChangeGoalView: View {
     
+    @Environment(\.modelContext) private var context
+    @Environment(\.dismiss) private var dismiss
+
     @Environment(ViewModel.self) private var vm
+    @Query var goals: [Goal]
+    
+    var currentGoal: Goal? {
+        goals.first
+    }
     
     var body: some View {
         @Bindable var vm = vm
@@ -23,10 +32,12 @@ struct ChangeGoalView: View {
         }
         
         .alert("Update Learning goal", isPresented: $vm.showAlert) {
-            Button("Dismiss", role: .cancel) { }
+            Button("Dismiss", role: .cancel) {
+                dismiss()
+            }
             Button("Update") {
-                // Your update action here
-//                vm.updateGoal()
+                vm.updateGoal(goal: currentGoal, context)
+                dismiss()
             }.keyboardShortcut(.defaultAction)
         } message: {
             Text("If you update now, your streak will start over.")

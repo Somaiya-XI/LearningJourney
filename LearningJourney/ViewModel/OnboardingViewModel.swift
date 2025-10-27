@@ -41,29 +41,61 @@ enum Pages : Identifiable, CaseIterable, View{
 
 @Observable
 class ViewModel {
-    
+    private var currentGoal: Goal?
+    private var modelContext: ModelContext?
+
     // On Boarding VM
     var goalTitle: String = ""
     var goalDuration: learningDuration = .week
     var isValidGoal: Bool = false
     
+    
+    // Load existing goal from context and sync states
+    private func loadCurrentGoal() {
+        guard let modelContext = modelContext else { return }
+        
+        do {
+            let goals = try modelContext.fetch(FetchDescriptor<Goal>())
+            if let goal = goals.first {
+                currentGoal = goal
+                goalTitle = goal.title
+                goalDuration = goal.learningDuration
+            }
+        } catch {
+            print("Failed to fetch goal: \(error)")
+        }
+    }
+    
+    func loadGoal(context: ModelContext) {
+        self.modelContext = context
+        loadCurrentGoal()
+    }
+    
+    
+    // Validating the user goal
     func validate() {
          isValidGoal = !goalTitle.isEmpty
      }
     
+    // Save the user goal after the validation
     func saveUserGoal(context: ModelContext) {
-        validate()
-        print("Title: '\(goalTitle)'")
-        print("Is valid: \(isValidGoal)")
-        
-        if isValidGoal {
-            let goal = Goal(goalTitle, goalDuration)
-            context.insert(goal)
-            try? context.save()
-            print("Goal saved successfully")
+            validate()
+            
+            if isValidGoal {
+                let goal = Goal(goalTitle, goalDuration)
+                context.insert(goal)
+                
+                do {
+                    try context.save()
+                    print("Goal saved successfully: \(goal.title)")
+                } catch {
+                    print("Failed to save goal: \(error)")
+                    isValidGoal = false
+                }
+            }
         }
-    }
     
+    // Getting the maximum allowed freeze based on the selected learning duration
     func getMaxFreezes(for duration: learningDuration) -> Int {
         switch duration {
         case .week: return 2
@@ -75,6 +107,8 @@ class ViewModel {
     // Activity VM
     var isLearned = false
     var isFreezed = false
+    var isMaxFreeze = false
+    
     var selectedPage: Pages?
     func selectPage(p: Pages){
         self.selectedPage = p
@@ -84,8 +118,98 @@ class ViewModel {
     var showAlert:Bool = false
     func AlertUser(){
         self.showAlert.toggle()
-        
     }
+    
+    func updateGoal(goal: Goal? ,_ context: ModelContext){
+        if let goal = goal {
+            goal.title = goalTitle
+            goal.learningDuration = goalDuration
+            goal.streak = 0
+            goal.freeze = 0
+            goal.lastLoggedDay = nil
+            goal.isLoggedToday = false
+            goal.isLearned = false
+            goal.days = []
+            try? context.save()
+        }
+    }
+    
+    func resetGoal(goal: Goal? ,_ context: ModelContext){
+        if let goal = goal {
+            goal.streak = 0
+            goal.freeze = 0
+            goal.lastLoggedDay = nil
+            goal.isLoggedToday = false
+            goal.isLearned = false
+            goal.days = []
+            try? context.save()
+        }
+    }
+    
+    func logAsFreezed(goal: Goal? ,_ context: ModelContext){
+        if let goal = goal {
+            if getMaxFreezes(for: goal.learningDuration) != goal.freeze {
+                goal.isLearned = false
+                goal.isLoggedToday = true
+                goal.freeze += 1
+                let day = Day(date: Date(), dayStatus: .Freeze)
+                goal.days.append(day)
+                goal.lastLoggedDay = day
+                try? context.save()
+            } else {
+                isMaxFreeze = true
+            }
+            
+        }
+    }
+    
+    func logAsLearned(goal: Goal? ,_ context: ModelContext){
+        if let goal = goal {
+            goal.isLearned = true
+            goal.isLoggedToday = true
+
+            goal.streak += 1
+            let day = Day(date: Date(), dayStatus: .Learn)
+            goal.days.append(day)
+            goal.lastLoggedDay = day
+            try? context.save()
+        }
+    }
+    
+    func checkAndResetIfNewDay(goal: Goal?, context: ModelContext) {
+        guard let goal = goal else { return }
+        
+        if let lastLoggedDate = goal.lastLoggedDay?.date {
+            let calendar = Calendar.current
+            let today = calendar.startOfDay(for: Date())
+            let lastLogged = calendar.startOfDay(for: lastLoggedDate)
+            let now = Date()
+            
+            let timeInterval = now.timeIntervalSince(lastLoggedDate)
+               let hoursPassed = timeInterval / 3600 
+            // If it's a new day
+            if today > lastLogged {
+
+                goal.isLoggedToday = false
+                goal.isLearned = false
+
+                
+                // Check if they missed 32 hours streak resets
+                if hoursPassed >= 32 {
+                    resetGoal(goal: goal, context)
+                    print("Streak reset - 32+ hours passed (logged at \(lastLoggedDate), now is \(now))")
+                }
+                
+                do {
+                    try context.save()
+                    print("Daily status reset for new day")
+                } catch {
+                    print("Failed to save reset: \(error)")
+                }
+            }
+        }
+    }
+
 }
 
 

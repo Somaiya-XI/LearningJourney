@@ -12,7 +12,17 @@ struct CalendarView: View {
     
     @State var vm = ViewModel()
     
-    @Query private var days: [Day]
+//    @Query private var days: [Day]
+    
+    @Query var goals: [Goal]
+    
+    var currentGoal: Goal? {
+        goals.first
+    }
+    
+    var days: [Day] {
+        currentGoal?.days ?? []
+    }
     
     var body: some View {
         ScrollViewReader{ proxy in
@@ -71,7 +81,7 @@ struct CalendarView: View {
             }
             
             let bgColor: Color = {
-                if vm.calendar.isDateInToday(date) && matchingDay == nil {
+                if vm.calendar.isDateInToday(date) && matchingDay === nil {
                     return .accentPrimary
                 }
                 if let status = matchingDay?.dayStatus {
@@ -81,13 +91,13 @@ struct CalendarView: View {
             }()
 
             let txtColor: Color = {
-                if vm.calendar.isDateInToday(date) && matchingDay == nil{
+                if vm.calendar.isDateInToday(date) && matchingDay === nil{
                     return .white
                 }
                 if let status = matchingDay?.dayStatus {
                     return status == .Learn ? .accentPrimary : .accentSecondary
                 }
-                return .white
+                return .foregroundAccent
             }()
             
             Text("\(vm.calendar.component(.day, from: date))")

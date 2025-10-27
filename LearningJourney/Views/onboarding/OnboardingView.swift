@@ -14,7 +14,7 @@ enum Selections : Identifiable, CaseIterable{
 }
 
 struct OnboardingView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var context
     @Environment(ViewModel.self) private var vm
     
     var body: some View {
@@ -41,7 +41,7 @@ struct OnboardingView: View {
             Spacer()
             SecondaryButton(label: "Start learning",
                   fillColor:.accentPrimaryExact,width: 140, action: {
-                vm.saveUserGoal(context: modelContext)
+                vm.saveUserGoal(context: context)
 
 
             })

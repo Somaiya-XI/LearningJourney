@@ -6,11 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PrimaryButton: View {
-    var label: String = "Log as Learned"
+    @Environment(ViewModel.self) private var vm
+    @Query var goals: [Goal]
     
-    var fillColor: Color = Color.accentPrimary
+    var currentGoal: Goal? {
+        goals.first
+    }
+
+    var textProps: (text: String, foregroundColor: Color, fillColor: Color) = ("Log as Learned", .secondary, .accentPrimary)
     var isDisabled : Bool
 
     var action: () -> Void =
@@ -20,17 +26,18 @@ struct PrimaryButton: View {
     
     var body: some View {
         VStack{
-            Text(label)
+            Text(textProps.text)
                 .multilineTextAlignment(.center)
                 .padding()
                 .font(.system(size: 36))
                 .bold()
-                .foregroundStyle(.white)
+                .foregroundStyle(textProps.foregroundColor)
                 .frame(width: 274, height: 274)
-                .glassEffect(.clear.interactive( !isDisabled).tint(isDisabled ? fillColor.opacity(0.1): fillColor))
+                .glassEffect(.clear.interactive( !isDisabled).tint(textProps.fillColor))
                 .onTapGesture {
-                    action()
-                }.disabled(isDisabled)
+                    if !isDisabled {
+                        action()
+                    }                }.disabled(isDisabled)
             //
             //                Button("Log as learned"){}
             //                    .buttonStyle(.bordered)
@@ -51,7 +58,6 @@ struct PrimaryButton: View {
             //                    .buttonStyle(.glassProminent)
             //                    .tint(.accentPrimary)
             //                    .glassEffect(.clear)
-            //                    .foregroundStyle(.foreground).disabled(true)
             
         }
         
@@ -61,4 +67,4 @@ struct PrimaryButton: View {
 
 #Preview {
     PrimaryButton(isDisabled: false)
-}
+         .environment(ViewModel())}

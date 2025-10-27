@@ -8,10 +8,10 @@
 import SwiftUI
 import SwiftData
 struct ContentView: View {
-    @Query var goals: [Goal] // Add SwiftData query
+    @Query var goals: [Goal] 
     
     var currentGoal: Goal? {
-        goals.first // Or however you determine the current goal
+        goals.first
     }
 
     var body: some View {
@@ -20,8 +20,8 @@ struct ContentView: View {
             if currentGoal?.title.isEmpty ?? true {
                 OnboardingView()
             } else {
-//                ActivityView()
-                SavedDataView()
+                ActivityView()
+//                SavedDataView()
 
             }
 
@@ -33,5 +33,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-      
 }

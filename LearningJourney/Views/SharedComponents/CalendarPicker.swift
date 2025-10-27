@@ -11,8 +11,16 @@ import SwiftData
 struct CalendarPicker: View {
     @State var vm = ViewModel()
     
-    @Query private var days: [Day]
-
+    @Query var goals: [Goal]
+    
+    var currentGoal: Goal? {
+        goals.first
+    }
+    
+    var days: [Day] {
+        currentGoal?.days ?? []
+    }
+    
     var body: some View {
         let weekDays = vm.GenerateWeekGrid()
         
