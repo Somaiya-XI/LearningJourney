@@ -13,16 +13,13 @@ struct ContentView: View {
     var currentGoal: Goal? {
         goals.first
     }
-
     var body: some View {
-    
         NavigationStack{
-            if currentGoal?.title.isEmpty ?? true {
+            if currentGoal == nil || (currentGoal?.title.isEmpty ?? true) {
                 OnboardingView()
             } else {
                 ActivityView()
 //                SavedDataView()
-
             }
 
 

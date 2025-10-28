@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 
+// enum to provide all the duration choices
 enum learningDuration: String, Identifiable, CaseIterable, Codable {
     case week = "Week"
     case month = "Month"
@@ -15,6 +16,27 @@ enum learningDuration: String, Identifiable, CaseIterable, Codable {
     var id: Self { self }
 }
 
+// enum to provide the status of logged days
+enum DayStatus: String, Codable {
+    case Learn = "Learn"
+    case Freeze = "Freeze"
+}
+
+// Model to store the day date and status
+@Model
+class Day: Identifiable {
+    var id: UUID = UUID()
+    var date: Date
+    var dayStatus: DayStatus
+    
+    init(date: Date, dayStatus: DayStatus) {
+        self.id = UUID()
+        self.date = date
+        self.dayStatus = dayStatus
+    }
+}
+
+// Model to store the goal with its related days list and current goal progress
 @Model
 class Goal: Identifiable {
     var id: UUID = UUID()
@@ -26,6 +48,8 @@ class Goal: Identifiable {
     var isLoggedToday: Bool
     var isLearned: Bool
     var days: [Day] = []
+    var isGoalAchieved: Bool = false
+    var isMaxFreeze = false
     
     init(_ title: String, _ learningDuration: learningDuration, _ lastLoggedDay: Day? = nil) {
         self.id = UUID()
@@ -41,21 +65,5 @@ class Goal: Identifiable {
     
 }
 
-enum DayStatus: String, Codable {
-    case Learn = "Learn"
-    case Freeze = "Freeze"
-}
 
-@Model
-class Day: Identifiable {
-    var id: UUID = UUID()
-    var date: Date
-    var dayStatus: DayStatus
-    
-    init(date: Date, dayStatus: DayStatus) {
-        self.id = UUID()
-        self.date = date
-        self.dayStatus = dayStatus
-    }
-}
 

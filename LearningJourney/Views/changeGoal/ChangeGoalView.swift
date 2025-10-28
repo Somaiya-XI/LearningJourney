@@ -22,15 +22,10 @@ struct ChangeGoalView: View {
     
     var body: some View {
         @Bindable var vm = vm
-
         VStack{
             GoalForm()
-            Button("Alert"){
-                vm.AlertUser()
-            }
             Spacer()
         }
-        
         .alert("Update Learning goal", isPresented: $vm.showAlert) {
             Button("Dismiss", role: .cancel) {
                 dismiss()

@@ -25,7 +25,7 @@ struct OnboardingView: View {
                 .foregroundStyle(.accentPrimary)
                 .font(.system(size: 36, weight: .bold))
                 .frame(width: 109, height: 109)
-                .glassEffect(.clear.tint(.accentPrimaryDisabled))
+                .glassEffect(.clear.tint(.accentPrimaryDisabled.opacity(0.3)))
                 .padding(.bottom, 47).padding(.top, 24)
             
             VStack(alignment: .leading){

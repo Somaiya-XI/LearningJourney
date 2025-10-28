@@ -8,36 +8,71 @@
 import SwiftUI
 import SwiftData
 struct SavedDataView: View {
-    
+    @State private var dateProvider = DateProvider.shared
     @Environment(\.modelContext) var context
-    @Query private var days: [Day]
     @Query private var goals: [Goal]
-
+    
+    var currentGoal: Goal? {
+        goals.first
+    }
+    
+    var days: [Day] {
+        currentGoal?.days ?? []
+    }
+    
     var body: some View {
         VStack{
-            Text("Total days in DB: \(days.count)") // DEBUG
-                            .foregroundColor(.red)
             HStack{
-                Button("Learn a day"){
-                    let day = Day(date: Date(), dayStatus: .Learn)
-                    context.insert(day)
-                }.buttonStyle(.glassProminent)
-                    .tint(.accentPrimaryExact)
-                
-                Button("Freeze a day"){
-                    let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
-                    
-                    let day = Day(date: yesterday, dayStatus: .Freeze)
-                    context.insert(day)
-                }.buttonStyle(.glassProminent)
-                    .tint(.accentSecondary)
-                
-                Button("Delete"){
-                    deleteAllDays()
-                }.buttonStyle(.glassProminent)
-                    .tint(.red.opacity(0.9))
+                Spacer()
+                Text("Total days in DB: \(days.count)").foregroundColor(.red)
+                Spacer()
+                Button("Delete Goal"){deleteGoal(goal: currentGoal)}
+                    .buttonStyle(.glassProminent)
+                    .tint(.red.opacity(0.6))
+                Spacer()
             }
-            
+#if DEBUG
+                VStack(spacing: 3) {
+                    // Current time display
+                    VStack(spacing: 1) {
+                        Text(dateProvider.currentDate.formatted(date: .abbreviated, time: .standard))
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                    
+                    // Quick jumps
+                    VStack(spacing: 6) {
+                        HStack(spacing: 2) {
+                            Button("-1d") { dateProvider.addDays(-1) }
+                            Button("+1d") { dateProvider.addDays(1) }
+                            Button("+7d") { dateProvider.addDays(7) }
+                            Button("+12h") { dateProvider.addHours(12) }
+                            Button("+24h") { dateProvider.addHours(24) }
+                            Button("+29h") { dateProvider.addHours(29) }                .foregroundStyle(.orange)
+                        }
+                        HStack{
+                            Button("+32h") { dateProvider.addHours(32) }
+                                .foregroundStyle(.red)
+                            Button("+1h") { dateProvider.addHours(1) }
+                                .foregroundStyle(.red)
+                            Button("12:00 AM") { dateProvider.addMinutes(1) }
+                            Button("11:59 PM") { dateProvider.setToAlmostMidnight() }
+                            
+                            Button("Reset to Now") {
+                                dateProvider.reset()
+                                deleteGoal(goal: currentGoal)
+                            }
+                            .font(.caption)
+                            .foregroundStyle(.blue)
+                        }
+                    }
+                    
+                    
+                }.padding(0)
+                    .font(.caption)
+                    .buttonStyle(.glass)
+#endif
+                
             List {
                 Section{
                     ForEach(days){ day in
@@ -45,28 +80,32 @@ struct SavedDataView: View {
                     }.onDelete{indecies in
                         for i in indecies{
                             deleteDay(days[i])
-
                         }
                         
-                    }
-                }
-                Section{
-                    ForEach(goals){ goal in
-                        Text("\(goal.title) ")
                     }
                 }
             }
         }
             
     }
-    func deleteAllDays() {
-        do {
-            try context.delete(model: Goal.self)
+    func deleteGoal(goal: Goal?) {
+            if let goal = goal{
+                goal.title = ""
+                goal.freeze = 0
+                goal.streak = 0
+                goal.isLoggedToday = false
+                goal.isLearned = false
+                goal.lastLoggedDay = nil
+                goal.days = []
+                goal.isGoalAchieved = false
+                goal.isMaxFreeze = false
+                do {
+                    try context.save()
 
-            try context.save()
-        } catch {
-            print("Failed to delete all days: \(error)")
-        }
+                } catch {
+                    print("error resetting")
+                }
+            }
     }
     
     func deleteDay(_ day: Day){
