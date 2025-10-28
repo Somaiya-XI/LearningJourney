@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+
 struct ContentView: View {
     @Query var goals: [Goal] 
     
@@ -15,7 +16,7 @@ struct ContentView: View {
     }
     var body: some View {
         NavigationStack{
-            if currentGoal == nil || (currentGoal?.title.isEmpty ?? true) {
+            if currentGoal?.title == nil || currentGoal?.title == ""  {
                 OnboardingView()
             } else {
                 ActivityView()

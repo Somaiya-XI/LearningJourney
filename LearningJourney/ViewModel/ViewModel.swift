@@ -13,7 +13,7 @@ import SwiftData
 enum Pages : Identifiable, CaseIterable, View {
     case goalPage
     case calendar
-    case test
+//    case test
     var id: Self {self}
     var body: some View {
         switch self{
@@ -21,8 +21,8 @@ enum Pages : Identifiable, CaseIterable, View {
             CalendarView()
         case .goalPage:
             ChangeGoalView()
-        case .test:
-            SavedDataView()
+//        case .test:
+//            SavedDataView()
         }
         
     }

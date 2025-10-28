@@ -17,6 +17,7 @@
 		538FD3832EB032800071F2BA /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538FD3822EB032800071F2BA /* CalendarViewModel.swift */; };
 		538FD3852EB032B10071F2BA /* WeekCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538FD3842EB032B10071F2BA /* WeekCalendarViewModel.swift */; };
 		538FD3872EB032DF0071F2BA /* BadgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538FD3862EB032DF0071F2BA /* BadgeViewModel.swift */; };
+		53DD89D72EB0D19100BB67F0 /* TestStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53DD89D62EB0D18900BB67F0 /* TestStyles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		538FD3822EB032800071F2BA /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		538FD3842EB032B10071F2BA /* WeekCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCalendarViewModel.swift; sourceTree = "<group>"; };
 		538FD3862EB032DF0071F2BA /* BadgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeViewModel.swift; sourceTree = "<group>"; };
+		53DD89D62EB0D18900BB67F0 /* TestStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -137,6 +139,7 @@
 		538FD3882EB036C40071F2BA /* Testing Models */ = {
 			isa = PBXGroup;
 			children = (
+				53DD89D62EB0D18900BB67F0 /* TestStyles.swift */,
 				538FD37E2EB01D3A0071F2BA /* DateProvider.swift */,
 			);
 			path = "Testing Models";
@@ -230,6 +233,7 @@
 				538FD37F2EB01D3A0071F2BA /* DateProvider.swift in Sources */,
 				538FD3872EB032DF0071F2BA /* BadgeViewModel.swift in Sources */,
 				5344265A2EA5270300032EB7 /* LearningJourneyApp.swift in Sources */,
+				53DD89D72EB0D19100BB67F0 /* TestStyles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

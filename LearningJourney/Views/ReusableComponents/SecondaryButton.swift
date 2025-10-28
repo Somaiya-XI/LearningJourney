@@ -25,7 +25,7 @@ struct SecondaryButton: View {
             .padding(.horizontal, 21)
             .padding(.vertical,14)
             .font(.body).fontWeight(.medium)
-            .glassEffect(.clear.interactive( !isDisabled).tint(!isDisabled ? fillColor: fillColor.opacity(0.2)))
+            .glassEffect(.clear.interactive( !isDisabled).tint(!isDisabled ? fillColor :  fillColor.opacity(0.2)))
             .onTapGesture {
                 action()
             }.disabled(isDisabled)

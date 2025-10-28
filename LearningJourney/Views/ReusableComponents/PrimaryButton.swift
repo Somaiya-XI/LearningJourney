@@ -16,7 +16,7 @@ struct PrimaryButton: View {
         goals.first
     }
 
-    var textProps: (text: String, foregroundColor: Color, fillColor: Color) = ("Log as Learned", .secondary, .accentPrimary)
+    var textProps: (text: String, foregroundColor: Color, fillColor: Color) = ("Log as Learned", .foregroundAccent, .accentPrimary)
     var isDisabled : Bool
 
     var action: () -> Void =
@@ -38,27 +38,7 @@ struct PrimaryButton: View {
                     if !isDisabled {
                         action()
                     }                }.disabled(isDisabled)
-            //
-            //                Button("Log as learned"){}
-            //                    .buttonStyle(.bordered)
-            //                    .tint(.accentTernary)
-            //                    .glassEffect(.clear.interactive()                    .tint(.accentTernary)
-            //)
-            //                    .foregroundStyle(.foreground).disabled(false)
-            //
-            //
-            //                Button("Log as learnsd"){}
-            //                    .buttonStyle(.bordered)
-            //                    .glassEffect(.clear.interactive(false)                    .tint(.accentPrimaryDisabled.opacity(0.5))
-            //)
-            //                    .foregroundStyle(.accentPrimaryTxt).disabled(true)
-            //
-            //
-            //                Button("Log as learnsd"){}
-            //                    .buttonStyle(.glassProminent)
-            //                    .tint(.accentPrimary)
-            //                    .glassEffect(.clear)
-            
+
         }
         
         
@@ -68,3 +48,5 @@ struct PrimaryButton: View {
 #Preview {
     PrimaryButton(isDisabled: false)
          .environment(ViewModel())}
+
+

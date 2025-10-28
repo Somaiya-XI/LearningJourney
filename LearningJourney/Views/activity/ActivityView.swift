@@ -101,13 +101,16 @@ struct ActivityView: View {
                     }
                 }
                 
-                ToolbarSpacer(.fixed, placement: .topBarTrailing)
-                ToolbarItem(placement: .topBarTrailing){
-                    Button("", systemImage: "wand.and.sparkles"){
-                        vm.selectPage(p: .test)
-                    }
-                }
-                
+                /*  comment after **/
+
+//                ToolbarSpacer(.fixed, placement: .topBarTrailing)
+//                ToolbarItem(placement: .topBarTrailing){
+//                    Button("", systemImage: "wand.and.sparkles"){
+//                        vm.selectPage(p: .test)
+//                    }
+//                }
+
+                /*  comment before **/
             }.toolbarTitleDisplayMode(.inlineLarge)
             .navigationBarBackButtonHidden()
             .navigationDestination(item:  Bindable(vm).selectedPage) { page in
